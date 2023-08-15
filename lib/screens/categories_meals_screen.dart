@@ -1,13 +1,15 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+
 // Shows us  the meal for a certain category
 
 import 'package:flutter/material.dart';
 import 'package:mealsapp/widgets/meal_item.dart';
 
-import '../data/dummy_data.dart';
+import '../models/meal.dart';
 
 class CategoryMealScreen extends StatelessWidget {
-  const CategoryMealScreen({super.key});
+  const CategoryMealScreen({super.key, required this.availableMeals});
+  final List<Meal> availableMeals;
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +18,7 @@ class CategoryMealScreen extends StatelessWidget {
     final categoryTitle = routeArguments["title"];
     final categoryId = routeArguments["id"];
     //  The filtered categories of meals
-    final categoryMeals = DUMMY_MEALS.where((meal) {
+    final categoryMeals = availableMeals.where((meal) {
       return meal.categories.contains(categoryId);
     }).toList();
     return Scaffold(
